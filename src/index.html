@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Journal</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1><i class="fas fa-book-quran"></i> Quran Journal</h1>
+                <nav class="main-nav">
+                    <button class="nav-btn active" data-page="home">Home</button>
+                    <button class="nav-btn" data-page="surah-list">Surah List</button>
+                    <button class="nav-btn" data-page="my-journal">My Journal</button>
+                    <button class="nav-btn" data-page="progress">Progress</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h2>Welcome to Your Quran Journal</h2>
+                        <p class="hero-subtitle">Track your Quran reading progress, reflect on verses, and grow spiritually</p>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <i class="fas fa-book"></i>
+                                <div>
+                                    <h3>114</h3>
+                                    <span>Surahs</span>
+                                </div>
+                            </div>
+                            <div class="hero-stat">
+                                <i class="fas fa-pen"></i>
+                                <div>
+                                    <h3 id="home-total-entries">0</h3>
+                                    <span>Journal Entries</span>
+                                </div>
+                            </div>
+                            <div class="hero-stat">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3 id="home-completed">0</h3>
+                                    <span>Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-actions">
+                            <button class="btn-primary hero-btn" data-page="surah-list">
+                                <i class="fas fa-list"></i> Browse Surahs
+                            </button>
+                            <button class="btn-outline hero-btn" data-page="my-journal">
+                                <i class="fas fa-journal-whills"></i> View Journal
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <i class="fas fa-quran"></i>
+                    </div>
+                </div>
+
+                <div class="recent-entries-section">
+                    <h3>Recent Journal Entries</h3>
+                    <div class="recent-entries" id="recent-entries">
+                        <div class="empty-state mini">
+                            <i class="fas fa-book-open"></i>
+                            <p>No recent entries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-cards">
+                        <div class="action-card" data-page="surah-list">
+                            <i class="fas fa-search"></i>
+                            <h4>Search Surah</h4>
+                            <p>Find and explore any surah from the Quran</p>
+                        </div>
+                        <div class="action-card" data-page="my-journal">
+                            <i class="fas fa-plus"></i>
+                            <h4>Add Entry</h4>
+                            <p>Create a new journal entry for your reflections</p>
+                        </div>
+                        <div class="action-card" data-page="progress">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>View Progress</h4>
+                            <p>Track your reading progress and statistics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Surah List Page -->
+            <div id="surah-list" class="page">
+                <div class="page-header">
+                    <h2>List of Surahs</h2>
+                    <div class="search-box">
+                        <input type="text" id="search-surah" placeholder="Search surah by name..." class="search-input">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+                <div class="surah-grid" id="surah-grid">
+                    <div class="loading">Loading surahs...</div>
+                </div>
+            </div>
+
+            <!-- My Journal Page -->
+            <div id="my-journal" class="page">
+                <div class="page-header">
+                    <h2>My Journal Entries</h2>
+                    <button class="btn-primary" id="add-journal-btn">
+                        <i class="fas fa-plus"></i> Add New Entry
+                    </button>
+                </div>
+                <div class="journal-entries" id="journal-entries">
+                    <div class="empty-state">
+                        <i class="fas fa-book-open"></i>
+                        <h3>No Journal Entries Yet</h3>
+                        <p>Start your Quran journaling journey by adding your first entry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Page -->
+            <div id="progress" class="page">
+                <div class="page-header">
+                    <h2>Reading Progress</h2>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-overview">
+                        <div class="stat-card completed">
+                            <h3>Completed Surahs</h3>
+                            <span class="stat-number" id="completed-surahs">0</span>
+                            <small>out of 114 surahs</small>
+                        </div>
+                        <div class="stat-card in-progress">
+                            <h3>In Progress</h3>
+                            <span class="stat-number" id="inprogress-surahs">0</span>
+                            <small>surahs being read</small>
+                        </div>
+                        <div class="stat-card not-started">
+                            <h3>Not Started</h3>
+                            <span class="stat-number" id="notstarted-surahs">0</span>
+                            <small>surahs to begin</small>
+                        </div>
+                        <div class="stat-card entries">
+                            <h3>Journal Entries</h3>
+                            <span class="stat-number" id="total-entries">0</span>
+                            <small>total reflections</small>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Progress Overview</h3>
+                        <div class="progress-chart">
+                            <canvas id="progress-chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="progress-details">
+                        <h3>Detailed Progress</h3>
+                        <div class="detail-grid" id="progress-details">
+                            <div class="progress-empty" style="grid-column: 1 / -1;">
+                                <i class="fas fa-chart-pie"></i>
+                                <h3>No Progress Data Yet</h3>
+                                <p>Start adding journal entries to see your progress here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Journal Modal -->
+        <div id="journal-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Add Journal Entry</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="journal-form">
+                        <input type="hidden" id="entry-id">
+                        <div class="form-group">
+                            <label for="surah-select">Surah:</label>
+                            <select id="surah-select" class="form-control" required>
+                                <option value="">Select a surah</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ayahs-completed">Ayahs Completed:</label>
+                            <input type="number" id="ayahs-completed" class="form-control" min="0" value="0" required>
+                            <small class="form-text" id="total-ayahs-text" style="display: none;">Total ayahs: 0</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="reflection">Reflection Notes:</label>
+                            <textarea id="reflection" class="form-control" rows="6" placeholder="Write your thoughts and reflections..." style="resize: vertical;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select id="status" class="form-control">
+                                <option value="not-started">Not Started</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+                            <button type="submit" class="btn-primary">Save Entry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/crud.js"></script>
+    <script src="js/renderer.js"></script>
+</body>
+</html>
